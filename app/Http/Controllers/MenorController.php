@@ -10,11 +10,19 @@ use Carbon\Carbon;
 
 class MenorController extends Controller
 {
+<<<<<<< HEAD
+=======
+    // Mostrar formulario para agregar menores ligados a tutor
+>>>>>>> bc712e81460e84ab19c95f61c4a3575f8f9d22d6
     public function formulario(DatosUsuario $usuario)
     {
         return view('inscripcion.menor', compact('usuario'));
     }
 
+<<<<<<< HEAD
+=======
+    // Guardar menores ligados a tutor
+>>>>>>> bc712e81460e84ab19c95f61c4a3575f8f9d22d6
     public function guardar(Request $request, DatosUsuario $usuario)
     {
         $request->validate([
@@ -28,6 +36,7 @@ class MenorController extends Controller
             'certificado_nacimiento' => 'required|file|mimes:pdf,jpg,png|max:2048',
         ]);
 
+<<<<<<< HEAD
         $fechaNacimiento = Carbon::parse($request->fecha_nacimiento);
         $hoy = Carbon::now();
 
@@ -35,6 +44,11 @@ class MenorController extends Controller
 
         if ($edadAnios >= 5) {
             return back()->withErrors(['fecha_nacimiento' => 'El menor debe tener menos de 5 años.'])->withInput();
+=======
+        $edad = Carbon::parse($request->fecha_nacimiento)->age;
+        if ($edad >= 6) {
+            return back()->withErrors(['fecha_nacimiento' => 'El menor debe ser menor de 6 años'])->withInput();
+>>>>>>> bc712e81460e84ab19c95f61c4a3575f8f9d22d6
         }
 
         $archivoControlSano = $request->file('carnet_control_sano')->store('archivos', 'public');
@@ -48,7 +62,11 @@ class MenorController extends Controller
             'rut' => $request->rut,
             'fecha_nacimiento' => $request->fecha_nacimiento,
             'genero' => $request->genero,
+<<<<<<< HEAD
             'edad' => $edadAnios, // Guardamos en años
+=======
+            'edad' => $edad,
+>>>>>>> bc712e81460e84ab19c95f61c4a3575f8f9d22d6
             'carnet_control_sano' => $archivoControlSano,
             'certificado_nacimiento' => $archivoCertificado,
         ]);
@@ -57,6 +75,10 @@ class MenorController extends Controller
             ->with('success', 'Menor registrado correctamente. Puede agregar otro o finalizar.');
     }
 
+<<<<<<< HEAD
+=======
+    // Actualizar menor
+>>>>>>> bc712e81460e84ab19c95f61c4a3575f8f9d22d6
     public function update(Request $request, Menor $menor)
     {
         $request->validate([
@@ -70,6 +92,7 @@ class MenorController extends Controller
             'certificado_nacimiento' => 'nullable|file|mimes:pdf,jpg,png|max:2048',
         ]);
 
+<<<<<<< HEAD
         $fechaNacimiento = Carbon::parse($request->fecha_nacimiento);
         $hoy = Carbon::now();
 
@@ -77,6 +100,11 @@ class MenorController extends Controller
 
         if ($edadAnios >= 5) {
             return back()->withErrors(['fecha_nacimiento' => 'El menor debe tener menos de 5 años.'])->withInput();
+=======
+        $edad = Carbon::parse($request->fecha_nacimiento)->age;
+        if ($edad >= 6) {
+            return back()->withErrors(['fecha_nacimiento' => 'El menor debe ser menor de 6 años'])->withInput();
+>>>>>>> bc712e81460e84ab19c95f61c4a3575f8f9d22d6
         }
 
         $menor->nombres = $request->nombres;
@@ -85,20 +113,37 @@ class MenorController extends Controller
         $menor->rut = $request->rut;
         $menor->fecha_nacimiento = $request->fecha_nacimiento;
         $menor->genero = $request->genero;
+<<<<<<< HEAD
         $menor->edad = $edadAnios; // Guardamos en años
 
+=======
+        $menor->edad = $edad;
+
+        // Si envían nuevo carnet, eliminar el anterior y guardar el nuevo
+>>>>>>> bc712e81460e84ab19c95f61c4a3575f8f9d22d6
         if ($request->hasFile('carnet_control_sano')) {
             if ($menor->carnet_control_sano) {
                 Storage::delete($menor->carnet_control_sano);
             }
+<<<<<<< HEAD
             $menor->carnet_control_sano = $request->file('carnet_control_sano')->store('archivos', 'public');
         }
 
+=======
+            $menor->carnet_control_sano = $request->file('carnet_control_sano')->store('public/archivos');
+        }
+
+        // Si envían nuevo certificado, eliminar el anterior y guardar el nuevo
+>>>>>>> bc712e81460e84ab19c95f61c4a3575f8f9d22d6
         if ($request->hasFile('certificado_nacimiento')) {
             if ($menor->certificado_nacimiento) {
                 Storage::delete($menor->certificado_nacimiento);
             }
+<<<<<<< HEAD
             $menor->certificado_nacimiento = $request->file('certificado_nacimiento')->store('archivos', 'public');
+=======
+            $menor->certificado_nacimiento = $request->file('certificado_nacimiento')->store('public/archivos');
+>>>>>>> bc712e81460e84ab19c95f61c4a3575f8f9d22d6
         }
 
         $menor->save();
@@ -106,6 +151,10 @@ class MenorController extends Controller
         return redirect()->back()->with('success', 'Menor actualizado correctamente.');
     }
 
+<<<<<<< HEAD
+=======
+    // Eliminar menor
+>>>>>>> bc712e81460e84ab19c95f61c4a3575f8f9d22d6
     public function destroy(Menor $menor)
     {
         if ($menor->carnet_control_sano) {

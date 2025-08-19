@@ -19,12 +19,20 @@
     background-color: var(--light-color);
 }
 
+<<<<<<< HEAD
 /* Hero con fondo completo y transparencia */
+=======
+/* Hero con fondo completo y transparencia sin rojo */
+>>>>>>> bc712e81460e84ab19c95f61c4a3575f8f9d22d6
 .bienvenida-hero {
     background: url('../img/fondo1.jpg') center/cover no-repeat;
     color: white;
     text-align: center;
+<<<<<<< HEAD
     padding: 2rem 1rem;
+=======
+    padding: 3rem 1.5rem;
+>>>>>>> bc712e81460e84ab19c95f61c4a3575f8f9d22d6
     min-height: 70vh;
     display: flex;
     flex-direction: column;
@@ -38,7 +46,11 @@
     content: "";
     position: absolute;
     inset: 0;
+<<<<<<< HEAD
     background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 100%);
+=======
+    background-color: rgba(0,0,0,0.3); /* ligera transparencia oscura */
+>>>>>>> bc712e81460e84ab19c95f61c4a3575f8f9d22d6
     z-index: 1;
 }
 
@@ -46,6 +58,7 @@
     max-width: 800px;
     position: relative;
     z-index: 2;
+<<<<<<< HEAD
     padding: 0 1rem;
 }
 
@@ -55,10 +68,21 @@
     margin-bottom: 1.2rem;
     line-height: 1.2;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+=======
+}
+
+.bienvenida-hero h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+>>>>>>> bc712e81460e84ab19c95f61c4a3575f8f9d22d6
     animation: fadeInDown 0.8s ease-out;
 }
 
 .bienvenida-hero p {
+<<<<<<< HEAD
     font-size: 1rem;
     margin: 0 auto 2rem;
     line-height: 1.5;
@@ -72,14 +96,30 @@
     text-decoration: underline;
 }
 
+=======
+    font-size: 1.2rem;
+    max-width: 100%;
+    margin: 0 auto 2.5rem;
+    line-height: 1.6;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+>>>>>>> bc712e81460e84ab19c95f61c4a3575f8f9d22d6
 .bienvenida-btn-primary {
     background-color: var(--warning-color);
     border: none;
     color: var(--dark-color);
     font-weight: 700;
+<<<<<<< HEAD
     padding: 0.8rem 1.5rem;
     border-radius: 50px;
     font-size: 1rem;
+=======
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-size: 1.2rem;
+>>>>>>> bc712e81460e84ab19c95f61c4a3575f8f9d22d6
     box-shadow: var(--shadow);
     transition: var(--transition);
     display: inline-flex;
@@ -88,7 +128,10 @@
     gap: 0.5rem;
     animation: pulse 2s infinite 1s, fadeIn 1s ease-out 0.4s both;
     text-decoration: none;
+<<<<<<< HEAD
     min-width: 220px;
+=======
+>>>>>>> bc712e81460e84ab19c95f61c4a3575f8f9d22d6
 }
 
 .bienvenida-btn-primary:hover {
@@ -103,6 +146,7 @@
 }
 
 /* Tarjetas y secciones */
+<<<<<<< HEAD
 .bienvenida-section {
     padding: 2.5rem 0;
 }
@@ -114,12 +158,24 @@
     position: relative;
     text-align: center;
     font-size: 1.8rem;
+=======
+.bienvenida-section-title {
+    color: var(--dark-color);
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+    position: relative;
+    text-align: center;
+>>>>>>> bc712e81460e84ab19c95f61c4a3575f8f9d22d6
 }
 
 .bienvenida-section-title:after {
     content: '';
     display: block;
+<<<<<<< HEAD
     width: 60px;
+=======
+    width: 80px;
+>>>>>>> bc712e81460e84ab19c95f61c4a3575f8f9d22d6
     height: 4px;
     background: var(--primary-color);
     margin: 0.8rem auto 0;
@@ -128,7 +184,11 @@
 
 .bienvenida-card {
     transition: var(--transition);
+<<<<<<< HEAD
     border-radius: 12px;
+=======
+    border-radius: 15px;
+>>>>>>> bc712e81460e84ab19c95f61c4a3575f8f9d22d6
     overflow: hidden;
     height: 100%;
     margin-bottom: 1.5rem;
@@ -140,12 +200,21 @@
 }
 
 .bienvenida-card:hover {
+<<<<<<< HEAD
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0,0,0,0.12);
 }
 
 .bienvenida-card-body {
     padding: 1.5rem 1rem;
+=======
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.bienvenida-card-body {
+    padding: 2rem 1.5rem;
+>>>>>>> bc712e81460e84ab19c95f61c4a3575f8f9d22d6
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -155,19 +224,30 @@
 }
 
 .bienvenida-card-title {
+<<<<<<< HEAD
     font-size: 1.3rem;
     margin: 1rem 0;
+=======
+    font-size: 1.5rem;
+    margin: 1.2rem 0;
+>>>>>>> bc712e81460e84ab19c95f61c4a3575f8f9d22d6
     font-weight: 700;
     color: var(--dark-color);
 }
 
 .bienvenida-card-text {
+<<<<<<< HEAD
     font-size: 1rem;
     line-height: 1.5;
+=======
+    font-size: 1.1rem;
+    line-height: 1.6;
+>>>>>>> bc712e81460e84ab19c95f61c4a3575f8f9d22d6
     color: #555;
 }
 
 .bienvenida-icon {
+<<<<<<< HEAD
     font-size: 2.5rem !important;
     color: var(--primary-color);
     margin-bottom: 0.5rem;
@@ -249,16 +329,28 @@
     to {
         transform: translateY(110vh) rotate(360deg);
     }
+=======
+    font-size: 3.5rem !important;
+    color: var(--primary-color);
+>>>>>>> bc712e81460e84ab19c95f61c4a3575f8f9d22d6
 }
 
 /* Animaciones */
 @keyframes fadeInDown {
+<<<<<<< HEAD
     from { opacity: 0; transform: translateY(-20px); }
+=======
+    from { opacity: 0; transform: translateY(-30px); }
+>>>>>>> bc712e81460e84ab19c95f61c4a3575f8f9d22d6
     to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeInUp {
+<<<<<<< HEAD
     from { opacity: 0; transform: translateY(20px); }
+=======
+    from { opacity: 0; transform: translateY(30px); }
+>>>>>>> bc712e81460e84ab19c95f61c4a3575f8f9d22d6
     to { opacity: 1; transform: translateY(0); }
 }
 
@@ -273,6 +365,7 @@
     100% { transform: scale(1); }
 }
 
+<<<<<<< HEAD
 /* Media queries para responsividad */
 @media (min-width: 576px) {
     .bienvenida-hero {
@@ -364,3 +457,32 @@
 .bienvenida-link:hover {
     color: #ffd166 !important;
 }
+=======
+/* Nieve */
+.bienvenida-snowflake {
+    position: absolute;
+    color: white;
+    font-size: 1rem;
+    pointer-events: none;
+    animation: fall linear infinite;
+    z-index: 1;
+}
+
+@keyframes fall {
+    to { transform: translateY(100vh); }
+}
+
+/* Media queries */
+@media (min-width: 768px) {
+    .bienvenida-hero { padding: 5rem 2rem; min-height: 70vh; }
+    .bienvenida-hero h1 { font-size: 3rem; }
+    .bienvenida-hero p { font-size: 1.4rem; max-width: 90%; }
+}
+
+@media (min-width: 992px) {
+    .bienvenida-hero { padding: 6rem 2rem; min-height: 80vh; }
+    .bienvenida-hero h1 { font-size: 3.5rem; }
+    .bienvenida-hero p { font-size: 1.6rem; max-width: 800px; }
+    .bienvenida-btn-primary { font-size: 1.3rem; padding: 1.2rem 2.5rem; }
+}
+>>>>>>> bc712e81460e84ab19c95f61c4a3575f8f9d22d6
