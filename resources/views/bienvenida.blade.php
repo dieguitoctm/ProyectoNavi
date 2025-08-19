@@ -66,21 +66,7 @@
         });
     });
     
-    // Efecto nieve (solo en diciembre)
-    if (new Date().getMonth() === 11) {
-        const snowflakesContainer = document.querySelector('.bienvenida-snowflakes');
-        for (let i = 0; i < 30; i++) {
-            const snowflake = document.createElement('div');
-            snowflake.classList.add('bienvenida-snowflake');
-            snowflake.innerHTML = '❄';
-            snowflake.style.left = `${Math.random() * 100}%`;
-            snowflake.style.fontSize = `${Math.random() * 0.8 + 0.5}rem`;
-            snowflake.style.animationDelay = `${Math.random() * 5}s`;
-            snowflake.style.animationDuration = `${Math.random() * 10 + 5}s`;
-            snowflake.style.opacity = Math.random() * 0.7 + 0.3;
-            snowflakesContainer.appendChild(snowflake);
-        }
-    }
+
 </script>
 @endsection
 @endsection
