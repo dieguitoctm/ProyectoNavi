@@ -1,0 +1,100 @@
+/* ===== ADMIN PANEL STYLES ===== */
+
+/* General layout */
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Titles */
+h1, h2 {
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* Tables */
+.table-responsive {
+    overflow-x: auto;
+}
+table {
+    background: #fff;
+    border-collapse: collapse;
+    width: 100%;
+}
+th {
+    background: #007bff;
+    color: #fff;
+    padding: 12px;
+    text-align: left;
+}
+td {
+    padding: 10px;
+    border-top: 1px solid #ddd;
+}
+tr:hover {
+    background: #f1f1f1;
+}
+
+/* Buttons */
+.btn {
+    padding: 6px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+    display: inline-block;
+}
+.btn-primary {
+    background: #007bff;
+    color: #fff;
+    border: none;
+}
+.btn-warning {
+    background: #ffc107;
+    color: #000;
+    border: none;
+}
+.btn-danger {
+    background: #dc3545;
+    color: #fff;
+    border: none;
+}
+.btn:hover {
+    opacity: 0.9;
+}
+
+/* Modals */
+.modal-header {
+    background: #007bff;
+    color: #fff;
+}
+.modal-footer {
+    background: #f8f9fa;
+}
+
+/* Forms */
+.form-label {
+    font-weight: bold;
+}
+.form-control, .form-select {
+    border-radius: 4px;
+}
+.was-validated .form-control:invalid, 
+.was-validated .form-select:invalid {
+    border-color: #dc3545;
+}
+
+/* Pagination */
+.pagination {
+    margin-top: 20px;
+    justify-content: center;
+}

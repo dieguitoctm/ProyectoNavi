@@ -1,0 +1,211 @@
+:root {
+    --primary-color: #e63946;
+    --secondary-color: #f1faee;
+    --accent-color: #a8dadc;
+    --dark-color: #1d3557;
+    --light-color: #f8f9fa;
+    --success-color: #2a9d8f;
+    --warning-color: #ffb703;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+/* Base */
+.bienvenida-body {
+    font-family: 'Nunito', sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #333;
+    background-color: var(--light-color);
+}
+
+/* Hero con fondo completo y transparencia sin rojo */
+.bienvenida-hero {
+    background: url('../img/fondo1.jpg') center/cover no-repeat;
+    color: white;
+    text-align: center;
+    padding: 3rem 1.5rem;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.bienvenida-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0,0,0,0.3); /* ligera transparencia oscura */
+    z-index: 1;
+}
+
+.bienvenida-hero-content {
+    max-width: 800px;
+    position: relative;
+    z-index: 2;
+}
+
+.bienvenida-hero h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    animation: fadeInDown 0.8s ease-out;
+}
+
+.bienvenida-hero p {
+    font-size: 1.2rem;
+    max-width: 100%;
+    margin: 0 auto 2.5rem;
+    line-height: 1.6;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.bienvenida-btn-primary {
+    background-color: var(--warning-color);
+    border: none;
+    color: var(--dark-color);
+    font-weight: 700;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    animation: pulse 2s infinite 1s, fadeIn 1s ease-out 0.4s both;
+    text-decoration: none;
+}
+
+.bienvenida-btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    background-color: #ffd166;
+    color: var(--dark-color);
+}
+
+.bienvenida-btn-primary:active {
+    transform: translateY(1px);
+}
+
+/* Tarjetas y secciones */
+.bienvenida-section-title {
+    color: var(--dark-color);
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+    position: relative;
+    text-align: center;
+}
+
+.bienvenida-section-title:after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: var(--primary-color);
+    margin: 0.8rem auto 0;
+    border-radius: 2px;
+}
+
+.bienvenida-card {
+    transition: var(--transition);
+    border-radius: 15px;
+    overflow: hidden;
+    height: 100%;
+    margin-bottom: 1.5rem;
+    border: none;
+    box-shadow: var(--shadow);
+    background-color: white;
+    position: relative;
+    border-top: 5px solid var(--primary-color);
+}
+
+.bienvenida-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.bienvenida-card-body {
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+}
+
+.bienvenida-card-title {
+    font-size: 1.5rem;
+    margin: 1.2rem 0;
+    font-weight: 700;
+    color: var(--dark-color);
+}
+
+.bienvenida-card-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+.bienvenida-icon {
+    font-size: 3.5rem !important;
+    color: var(--primary-color);
+}
+
+/* Animaciones */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Nieve */
+.bienvenida-snowflake {
+    position: absolute;
+    color: white;
+    font-size: 1rem;
+    pointer-events: none;
+    animation: fall linear infinite;
+    z-index: 1;
+}
+
+@keyframes fall {
+    to { transform: translateY(100vh); }
+}
+
+/* Media queries */
+@media (min-width: 768px) {
+    .bienvenida-hero { padding: 5rem 2rem; min-height: 70vh; }
+    .bienvenida-hero h1 { font-size: 3rem; }
+    .bienvenida-hero p { font-size: 1.4rem; max-width: 90%; }
+}
+
+@media (min-width: 992px) {
+    .bienvenida-hero { padding: 6rem 2rem; min-height: 80vh; }
+    .bienvenida-hero h1 { font-size: 3.5rem; }
+    .bienvenida-hero p { font-size: 1.6rem; max-width: 800px; }
+    .bienvenida-btn-primary { font-size: 1.3rem; padding: 1.2rem 2.5rem; }
+}

@@ -1,0 +1,88 @@
+/* resources/css/formulario.css */
+
+/* Estilos base */
+.form-wrapper {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    width: calc(100% - 2rem); /* Restamos el margen lateral */
+    max-width: 600px;
+    margin: 2rem auto;
+    box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,0.3);
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+}
+
+/* Contenedor principal para móviles */
+.container-fluid.p-0 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.form-title {
+    font-weight: bold;
+    color: #28a745;
+    font-size: clamp(1.8rem, 5vw, 2rem); /* Tamaño responsive fluido */
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.form-label {
+    font-size: clamp(1rem, 4vw, 1.2rem); /* Tamaño responsive */
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.form-control, .form-select {
+    font-size: clamp(1rem, 4vw, 1.1rem);
+    padding: 0.8rem 1rem;
+    margin-bottom: 1.5rem;
+    width: 100%;
+    border: 2px solid #ddd;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+}
+
+.btn-success {
+    background: linear-gradient(45deg, #28a745, #34ce57);
+    border: none;
+    padding: clamp(1rem, 4vw, 1.2rem);
+    font-size: clamp(1.1rem, 4vw, 1.3rem);
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.invalid-feedback, .valid-feedback {
+    font-size: clamp(0.9rem, 3vw, 1rem);
+    margin-top: -1rem;
+    margin-bottom: 1rem;
+}
+
+/* Responsivo para móviles pequeños */
+@media (max-width: 576px) {
+    .form-wrapper {
+        padding: 1rem;
+        margin: 1rem auto; /* Centrado horizontal con margen */
+        width: calc(100% - 2rem); /* 100% menos el margen */
+        border-radius: 0.5rem;
+    }
+    
+    .container-fluid.p-0 {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+}
+
+/* Ajustes para tablets */
+@media (min-width: 768px) {
+    .form-wrapper {
+        margin: 2rem auto;
+    }
+}
+
+/* Ajustes para pantallas grandes */
+@media (min-width: 1200px) {
+    .form-wrapper {
+        max-width: 650px;
+    }
+}
