@@ -3,87 +3,13 @@
 @section('title', 'Administración Usuarios y Menores')
 
 @section('content')
+    @vite(['resources/css/admin.css'])
 
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css" />
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
-
-    <style>
-        body {
-            background: url('{{ asset("img/fondo1.jpg") }}') no-repeat center center fixed;
-            background-size: cover;
-        }
-
-        table.dataTable thead {
-            background-color: #343a40 !important;
-            color: #fff;
-        }
-
-        table.dataTable tbody tr:hover {
-            background-color: #cfe2ff !important;
-        }
-
-        .dt-button.buttons-excel {
-            background-color: #198754 !important;
-            color: white !important;
-        }
-
-        .dt-button.buttons-pdf {
-            background-color: #dc3545 !important;
-            color: white !important;
-        }
-
-        /* Menores por tutor ocultos por defecto */
-        #menoresPorTutor {
-            display: none;
-            margin-top: 30px;
-        }
-
-        .tutor-card {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .tutor-card h4 {
-            margin-bottom: 15px;
-        }
-
-        .menores-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 15px;
-        }
-
-        .menor-card {
-            background-color: #f8f9fa;
-            border-radius: 10px;
-            padding: 15px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .menor-card h5 {
-            margin-bottom: 8px;
-        }
-
-        .text-small {
-            font-size: .9rem;
-        }
-
-        .table thead th {
-            white-space: nowrap;
-        }
-
-        .table .text-nowrap {
-            white-space: nowrap;
-        }
-    </style>
 
     <div class="container py-4">
-
         <h1 class="mb-4 text-center text-white">Administración Usuarios y Menores</h1>
 
         @if(session('success'))
@@ -92,8 +18,6 @@
 
         {{-- Helper: función pequeña para normalizar rutas 'public/...' --}}
         @php
-            // Reusable closure isn't allowed directly in Blade templates portably,
-            // so we'll inline the logic where needed below.
         @endphp
 
         <!-- Tabla Usuarios -->
@@ -114,8 +38,6 @@
                     </tr>
                 </thead>
                 <tbody>
-
-             
                     @foreach($usuarios as $usuario)
                         <tr data-id="{{ $usuario->id }}">
                             <td>{{ $usuario->nombres }}</td>
@@ -452,7 +374,7 @@
             });
 
             // Modal editar menor
-            $('.btn-editar-menor').click(function () {
+            $(document).on('click', '.btn-editar-menor', function() {
                 let btn = $(this);
                 $('#editar_menor_id').val(btn.data('id'));
                 $('#editar_menor_nombres').val(btn.data('nombres'));
@@ -512,12 +434,12 @@
                 this.value = '+' + valor;
             });
 
-            // Fecha nacimiento menores 0-6 años
+            // Fecha nacimiento menores 0-5 años
             function setFechaMaxMin() {
                 const hoy = new Date();
                 const max = hoy.toISOString().split('T')[0];
                 const seisAnios = new Date();
-                seisAnios.setFullYear(hoy.getFullYear() - 6);
+                seisAnios.setFullYear(hoy.getFullYear() - 5);
                 const min = seisAnios.toISOString().split('T')[0];
                 $('#editar_menor_fecha_nacimiento').attr('min', min).attr('max', max);
             }

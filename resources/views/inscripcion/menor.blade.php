@@ -3,91 +3,7 @@
 @section('title', 'Agregar Menores al Tutor')
 
 @section('content')
-<style>
-    body {
-        background: url('{{ asset("img/fondo1.jpg") }}') center/cover fixed no-repeat;
-        margin: 0;
-        padding: 0;
-    }
-    .form-wrapper {
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(5px);
-        padding: 1.5rem;
-        border-radius: 0;
-        box-shadow: none;
-        width: 100%;
-        min-height: 100vh;
-        margin: 0;
-    }
-    .form-title {
-        font-weight: bold;
-        color: #0d6efd;
-        font-size: 2rem;
-        margin-bottom: 1.5rem;
-        text-align: center;
-    }
-    .form-label {
-        font-size: 1.2rem;
-        margin-bottom: 0.5rem;
-        display: block;
-    }
-    .form-control, .form-select {
-        font-size: 1.1rem;
-        padding: 1rem;
-        margin-bottom: 1.5rem;
-        width: 100%;
-        border: 2px solid #ddd;
-        border-radius: 0.5rem;
-    }
-    .btn {
-        padding: 1.2rem;
-        font-size: 1.2rem;
-        border-radius: 0.5rem;
-        margin: 0.5rem 0;
-    }
-    .btn-primary {
-        background: linear-gradient(45deg, #0d6efd, #0056b3);
-        border: none;
-    }
-    .btn-success {
-        background: linear-gradient(45deg, #198754, #146c43);
-        border: none;
-    }
-    .btn-secondary {
-        background: #6c757d;
-        border: none;
-        color: white;
-    }
-    .invalid-feedback {
-        font-size: 1rem;
-        margin-top: -1rem;
-        margin-bottom: 1rem;
-    }
-    .alert {
-        font-size: 1.1rem;
-        padding: 1rem;
-    }
-    .d-flex.gap-3 {
-        gap: 1rem !important;
-    }
-
-    @media (max-width: 576px) {
-        .form-title { font-size: 1.8rem; }
-        .form-label { font-size: 1.1rem; }
-        .form-control, .form-select { font-size: 1rem; padding: 0.8rem; }
-        .btn { padding: 1rem; font-size: 1.1rem; }
-    }
-
-    @media (min-width: 768px) {
-        .form-wrapper {
-            max-width: 600px;
-            margin: 2rem auto;
-            min-height: auto;
-            border-radius: 1rem;
-            box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,0.3);
-        }
-    }
-</style>
+@vite(['resources/css/menor.css'])
 
 <div class="container-fluid p-0">
     <div class="form-wrapper">
@@ -151,16 +67,15 @@
             <div class="form-group">
                 <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
                 <input
-                    type="date"
+                    type="text"
                     name="fecha_nacimiento"
                     id="fecha_nacimiento"
-                    min="{{ \Carbon\Carbon::now()->subYears(5)->format('Y-m-d') }}"
-                    max="{{ \Carbon\Carbon::now()->format('Y-m-d') }}"
                     value="{{ old('fecha_nacimiento') }}"
                     class="form-control"
                     required
                     autocomplete="off"
                 >
+                <div class="valid-feedback">✓ Fecha válida</div>
                 <div class="invalid-feedback">El menor debe tener menos de 5 años y no puede ser una fecha futura.</div>
             </div>
 
@@ -197,71 +112,100 @@
     </div>
 </div>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/rut.js@1.0.2/dist/rut.min.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const rutInput = document.getElementById('rut');
-        const rutError = document.getElementById('rut-error');
-        const form = document.getElementById('form-menor');
-        const btnYes = document.getElementById('btn-yes');
-        const btnCancel = document.getElementById('btn-cancel');
-        const fechaNacimiento = document.getElementById('fecha_nacimiento');
+document.addEventListener('DOMContentLoaded', function () {
+    const rutInput = document.getElementById('rut');
+    const rutError = document.getElementById('rut-error');
+    const form = document.getElementById('form-menor');
+    const btnYes = document.getElementById('btn-yes');
+    const btnCancel = document.getElementById('btn-cancel');
+    const fechaNacimiento = document.getElementById('fecha_nacimiento');
 
-        // Mostrar formulario al dar "Sí"
-        btnYes.addEventListener('click', () => {
-            form.style.display = 'block';
-            btnYes.style.display = 'none';
-            window.scrollTo(0, 0);
-        });
+    btnYes.addEventListener('click', () => {
+        form.style.display = 'block';
+        btnYes.style.display = 'none';
+        window.scrollTo(0, 0);
+    });
 
-        // Ocultar formulario al cancelar
-        btnCancel.addEventListener('click', () => {
-            form.style.display = 'none';
-            btnYes.style.display = 'block';
-        });
+    btnCancel.addEventListener('click', () => {
+        form.style.display = 'none';
+        btnYes.style.display = 'block';
+    });
 
-        // Validación y formato RUT
-        rutInput.addEventListener('input', function () {
-            let clean = this.value.replace(/[^0-9kK]/g, '');
-            if (clean.length > 1) {
-                clean = clean.slice(0, -1).replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '-' + clean.slice(-1);
-            }
-            this.value = clean;
+    rutInput.addEventListener('input', function () {
+        let clean = this.value.replace(/[^0-9kK]/g, '');
+        if (clean.length > 1) {
+            clean = clean.slice(0, -1).replace(/\B(?=(\d{3})+(?!\d))/g, ".") + '-' + clean.slice(-1);
+        }
+        this.value = clean;
 
-            if (RUT.isValid(this.value)) {
+        if (RUT.isValid(this.value)) {
+            this.classList.remove('is-invalid');
+            this.classList.add('is-valid');
+            rutError.style.display = 'none';
+        } else {
+            this.classList.remove('is-valid');
+            this.classList.add('is-invalid');
+            rutError.style.display = 'block';
+        }
+    });
+
+    ['nombres', 'ap_paterno', 'ap_materno'].forEach(id => {
+        const el = document.getElementById(id);
+        el.addEventListener('input', function () {
+            this.value = this.value.replace(/[0-9]/g, '');
+            if (this.checkValidity()) {
+                this.classList.add('is-valid');
                 this.classList.remove('is-invalid');
-                rutError.style.display = 'none';
             } else {
                 this.classList.add('is-invalid');
-                rutError.style.display = 'block';
+                this.classList.remove('is-valid');
             }
-        });
-
-        // Bloquear números en nombres y apellidos
-        ['nombres', 'ap_paterno', 'ap_materno'].forEach(id => {
-            document.getElementById(id).addEventListener('input', function () {
-                this.value = this.value.replace(/[0-9]/g, '');
-            });
-        });
-
-        // Validación fecha
-        form.addEventListener('submit', function (event) {
-            const minDate = new Date(fechaNacimiento.min);
-            const maxDate = new Date(fechaNacimiento.max);
-            const selectedDate = new Date(fechaNacimiento.value);
-
-            if (isNaN(selectedDate.getTime()) || selectedDate < minDate || selectedDate > maxDate) {
-                fechaNacimiento.setCustomValidity('El menor debe tener menos de 5 años y no puede ser una fecha futura.');
-            } else {
-                fechaNacimiento.setCustomValidity('');
-            }
-
-            if (!form.checkValidity()) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
-            form.classList.add('was-validated');
         });
     });
+
+    const hoy = new Date();
+    const minHace5 = new Date(hoy.getFullYear() - 5, hoy.getMonth(), hoy.getDate());
+
+    flatpickr("#fecha_nacimiento", {
+        dateFormat: "Y-m-d",
+        locale: "es",
+        maxDate: hoy,
+        minDate: minHace5,
+        disableMobile: true,
+        altInput: true,
+        altFormat: "d \\de F \\de Y",
+    });
+
+    form.addEventListener('submit', function (event) {
+        const selectedDate = new Date(fechaNacimiento.value);
+        if (isNaN(selectedDate.getTime()) || selectedDate < minHace5 || selectedDate > hoy) {
+            fechaNacimiento.setCustomValidity('El menor debe tener menos de 5 años y no puede ser una fecha futura.');
+        } else {
+            fechaNacimiento.setCustomValidity('');
+        }
+
+        // VALIDACIÓN VISUAL DE FECHA (tick)
+        if (fechaNacimiento.checkValidity()) {
+            fechaNacimiento.classList.add('is-valid');
+            fechaNacimiento.classList.remove('is-invalid');
+        } else {
+            fechaNacimiento.classList.add('is-invalid');
+            fechaNacimiento.classList.remove('is-valid');
+        }
+
+        if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+    });
+});
 </script>
 @endsection
