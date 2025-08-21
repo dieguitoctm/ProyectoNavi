@@ -76,7 +76,7 @@
                     autocomplete="off"
                 >
                 <div class="valid-feedback">✓ Fecha válida</div>
-                <div class="invalid-feedback">El menor debe tener menos de 5 años y no puede ser una fecha futura.</div>
+                <div class="invalid-feedback">El menor debe haber nacido entre el 04 de enero de 2021 y el 31 de diciembre de 2025.</div>
             </div>
 
             <div class="form-group">
@@ -170,14 +170,15 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    const hoy = new Date();
-    const minHace5 = new Date(hoy.getFullYear() - 5, hoy.getMonth(), hoy.getDate());
+    // Definir rango de fechas permitido
+    const minFecha = new Date("2021-01-05");
+    const maxFecha = new Date("2025-12-31");
 
     flatpickr("#fecha_nacimiento", {
         dateFormat: "Y-m-d",
         locale: "es",
-        maxDate: hoy,
-        minDate: minHace5,
+        minDate: minFecha,
+        maxDate: maxFecha,
         disableMobile: true,
         altInput: true,
         altFormat: "d \\de F \\de Y",
@@ -185,13 +186,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     form.addEventListener('submit', function (event) {
         const selectedDate = new Date(fechaNacimiento.value);
-        if (isNaN(selectedDate.getTime()) || selectedDate < minHace5 || selectedDate > hoy) {
-            fechaNacimiento.setCustomValidity('El menor debe tener menos de 5 años y no puede ser una fecha futura.');
+        if (isNaN(selectedDate.getTime()) || selectedDate < minFecha || selectedDate > maxFecha) {
+            fechaNacimiento.setCustomValidity('El menor debe haber nacido entre el 04 de enero de 2021 y el 31 de diciembre de 2025.');
         } else {
             fechaNacimiento.setCustomValidity('');
         }
 
-        // VALIDACIÓN VISUAL DE FECHA (tick)
         if (fechaNacimiento.checkValidity()) {
             fechaNacimiento.classList.add('is-valid');
             fechaNacimiento.classList.remove('is-invalid');

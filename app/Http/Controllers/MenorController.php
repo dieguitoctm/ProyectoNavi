@@ -42,11 +42,12 @@ class MenorController extends Controller
         ]);
 
         $fechaNacimiento = Carbon::parse($request->fecha_nacimiento);
-        $edadAnios = $fechaNacimiento->age;
+        $minFecha = Carbon::create(2021, 1, 4);
+        $maxFecha = Carbon::create(2025, 12, 31);
 
-        // Validación: máximo 4 años 11 meses 29 días
-        if ($edadAnios >= 5) {
-            return back()->withErrors(['fecha_nacimiento' => 'El menor debe tener menos de 5 años.'])->withInput();
+        // Validación de rango
+        if ($fechaNacimiento->lt($minFecha) || $fechaNacimiento->gt($maxFecha)) {
+            return back()->withErrors(['fecha_nacimiento' => 'El menor debe haber nacido entre el 04 de enero de 2021 y el 31 de diciembre de 2025.'])->withInput();
         }
 
         $archivoControlSano = $request->file('carnet_control_sano')->store('archivos', 'public');
@@ -60,7 +61,7 @@ class MenorController extends Controller
             'rut' => $request->rut,
             'fecha_nacimiento' => $request->fecha_nacimiento,
             'genero' => $request->genero,
-            'edad' => $edadAnios,
+            'edad' => $fechaNacimiento->age,
             'carnet_control_sano' => $archivoControlSano,
             'certificado_nacimiento' => $archivoCertificado,
         ]);
@@ -84,10 +85,11 @@ class MenorController extends Controller
         ]);
 
         $fechaNacimiento = Carbon::parse($request->fecha_nacimiento);
-        $edadAnios = $fechaNacimiento->age;
+        $minFecha = Carbon::create(2021, 1, 4);
+        $maxFecha = Carbon::create(2025, 12, 31);
 
-        if ($edadAnios >= 5) {
-            return back()->withErrors(['fecha_nacimiento' => 'El menor debe tener menos de 5 años.'])->withInput();
+        if ($fechaNacimiento->lt($minFecha) || $fechaNacimiento->gt($maxFecha)) {
+            return back()->withErrors(['fecha_nacimiento' => 'El menor debe haber nacido entre el 04 de enero de 2021 y el 31 de diciembre de 2025.'])->withInput();
         }
 
         $menor->update([
@@ -97,7 +99,7 @@ class MenorController extends Controller
             'rut' => $request->rut,
             'fecha_nacimiento' => $request->fecha_nacimiento,
             'genero' => $request->genero,
-            'edad' => $edadAnios,
+            'edad' => $fechaNacimiento->age,
         ]);
 
         if ($request->hasFile('carnet_control_sano')) {
