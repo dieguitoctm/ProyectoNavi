@@ -33,13 +33,13 @@
                         
                         <div class="bienvenida-highlight">
                             <p class="mb-0 text-center fw-bold">¡Atención! Período de inscripciones:</p>
-                            <p class="mb-0 text-center">Desde el 25 de agosto hasta el 30 de noviembre de 2025</p>
+                            <p class="mb-0 text-center">Desde el 25 de Agosto hasta el 30 de Octubre de 2025</p>
                         </div>
                         
                         <ul class="bienvenida-info-list">
                             <li>
                                 <i class="bi bi-check-circle-fill"></i>
-                                <span>Dirigido a niños y niñas de 0 a 5 años residentes en la comuna de Coinco</span>
+                                <span>Dirigido a embarazadas, niños y niñas  de 0 a 5 años residentes en la comuna de Coinco</span>
                             </li>
                             <li>
                                 <i class="bi bi-check-circle-fill"></i>
