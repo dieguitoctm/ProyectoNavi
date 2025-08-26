@@ -23,7 +23,7 @@ class InscripcionController extends Controller
         return view('inscripcion.formulario'); // formulario solo tutor + embarazo
     }
 
-    // Guardar tutor + embarazo y redirigir a agregar menores
+    // Guardar tutor + embarazo y redirigir a agregar menores (usa hash_id en la URL pública)
     public function guardar(Request $request)
     {
         $request->validate([
@@ -60,7 +60,8 @@ class InscripcionController extends Controller
             ]);
         }
 
-        return redirect()->route('menor.formulario', $usuario->id)
+        // Redirige a /menor/{hash_id} para agregar menores
+        return redirect()->route('menor.formulario', $usuario->hash_id)
             ->with('success', 'Tutor registrado correctamente. Ahora puede agregar menores o finalizar.');
     }
 
@@ -68,12 +69,10 @@ class InscripcionController extends Controller
     public function index()
     {
         $usuarios = DatosUsuario::with(['embarazada', 'menores'])->paginate(10);
-
-        //dd($usuarios); // Para depurar y ver los usuarios
         return view('admin', compact('usuarios'));
     }
 
-    // Actualizar usuario
+    // Actualizar usuario (admin) - usamos id numérico como antes
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -106,12 +105,12 @@ class InscripcionController extends Controller
         return redirect()->back()->with('success', 'Usuario actualizado correctamente.');
     }
 
-    // Método para eliminar usuario
+    // Método para eliminar usuario (admin)
     public function destroy($id)
     {
         $usuario = DatosUsuario::findOrFail($id);
 
-        // Opcional: borrar archivos asociados si quieres
+        // Borrar archivos asociados si existen
         if ($usuario->registro_social) {
             Storage::delete($usuario->registro_social);
         }
@@ -140,14 +139,14 @@ class InscripcionController extends Controller
         return redirect()->back()->with('success', 'Usuario eliminado correctamente.');
     }
 
-    // Página despedida
-    public function despedida($usuario = null)
+    // Página despedida -> ahora busca por hash público
+    public function despedida($hash = null)
     {
-        if (!$usuario) {
+        if (!$hash) {
             return redirect()->route('inscripcion.bienvenida');
         }
 
-        $usuario = DatosUsuario::with('menores')->find($usuario);
+        $usuario = DatosUsuario::with('menores')->where('hash_id', $hash)->first();
 
         if (!$usuario) {
             return redirect()->route('inscripcion.bienvenida')->with('error', 'Usuario no encontrado.');
@@ -162,4 +161,3 @@ class InscripcionController extends Controller
         return Excel::download(new UsuariosMenoresExport, 'usuarios_menores.xlsx');
     }
 }
-

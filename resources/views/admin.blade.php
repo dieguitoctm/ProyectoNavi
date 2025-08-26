@@ -26,6 +26,7 @@
             <table id="usuariosTable" class="table table-striped table-hover align-middle" style="width:100%">
                 <thead class="table-dark">
                     <tr>
+                        <th>ID</th>
                         <th>Nombres</th>
                         <th>Apellido Paterno</th>
                         <th>Apellido Materno</th>
@@ -40,6 +41,7 @@
                 <tbody>
                     @foreach($usuarios as $usuario)
                         <tr data-id="{{ $usuario->id }}">
+                            <td>{{ $usuario->id }}</td>
                             <td>{{ $usuario->nombres }}</td>
                             <td>{{ $usuario->ap_paterno }}</td>
                             <td>{{ $usuario->ap_materno }}</td>

@@ -27,10 +27,10 @@
 
         <div class="d-flex flex-column flex-md-row justify-content-center gap-3 mb-4">
             <button id="btn-yes" class="btn btn-primary">Sí, agregar menor</button>
-            <a href="{{ route('inscripcion.despedida', $usuario->id) }}" class="btn btn-success">No, finalizar inscripción</a>
+            <a href="{{ route('inscripcion.despedida', $usuario->hash_id) }}" class="btn btn-success">No, finalizar inscripción</a>
         </div>
 
-        <form id="form-menor" method="POST" action="{{ route('menor.guardar', $usuario->id) }}"
+        <form id="form-menor" method="POST" action="{{ route('menor.guardar', $usuario->hash_id) }}"
             enctype="multipart/form-data" novalidate style="display: none;">
             @csrf
 
@@ -170,7 +170,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Definir rango de fechas permitido
     const minFecha = new Date("2021-01-05");
     const maxFecha = new Date("2025-12-31");
 
