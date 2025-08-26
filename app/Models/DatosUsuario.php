@@ -2,13 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
+use App\Models\Embarazada;
+use App\Models\Menor;
 
 class DatosUsuario extends Model
 {
-     use HasFactory;
-     protected $table = 'datos_usuarios';
+    use HasFactory;
+
+    protected $table = 'datos_usuarios';
 
     protected $fillable = [
         'nombres',
@@ -18,13 +22,21 @@ class DatosUsuario extends Model
         'direccion',
         'rut',
         'registro_social',
+        'hash_id'
     ];
 
-    /**
-     * Relación uno a uno con embarazada
-     */
-    // app/Models/DatosUsuario.php
+    protected static function boot()
+    {
+        parent::boot();
 
+        static::creating(function ($model) {
+            if (empty($model->hash_id)) {
+                $model->hash_id = Str::random(32);
+            }
+        });
+    }
+
+    // Relaciones
     public function embarazada()
     {
         return $this->hasOne(Embarazada::class, 'usuario_id');

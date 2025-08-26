@@ -9,6 +9,7 @@
     <h1>¡Gracias, {{ $usuario->nombres }} {{ $usuario->ap_paterno }} {{ $usuario->ap_materno }}!</h1>
     <p>Tu inscripción ha sido registrada correctamente.</p>
 
+    <!-- Mostrar el ID real del usuario -->
     <p>Tu número de inscripción es el <strong id="usuario-id">{{ $usuario->id }}</strong>.</p>
 
     <p>Has agregado <strong id="cantidad-menores">{{ $cantidadMenores }}</strong> menor{{ $cantidadMenores != 1 ? 'es' : '' }}.</p>

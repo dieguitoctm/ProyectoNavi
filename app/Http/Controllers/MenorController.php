@@ -10,15 +10,18 @@ use Carbon\Carbon;
 
 class MenorController extends Controller
 {
-    // Mostrar formulario para agregar menores ligados a tutor
-    public function formulario(DatosUsuario $usuario)
+    // Mostrar formulario para agregar menores ligados a tutor (recibe hash público)
+    public function formulario($hash)
     {
+        $usuario = DatosUsuario::where('hash_id', $hash)->firstOrFail();
         return view('inscripcion.menor', compact('usuario'));
     }
 
-    // Guardar menores ligados a tutor
-    public function guardar(Request $request, DatosUsuario $usuario)
+    // Guardar menores ligados a tutor (recibe hash)
+    public function guardar(Request $request, $hash)
     {
+        $usuario = DatosUsuario::where('hash_id', $hash)->firstOrFail();
+
         $request->validate([
             'nombres' => 'required|regex:/^[\pL\s]+$/u|min:2|max:50',
             'ap_paterno' => 'required|regex:/^[\pL\s]+$/u|min:2|max:50',
@@ -66,7 +69,7 @@ class MenorController extends Controller
             'certificado_nacimiento' => $archivoCertificado,
         ]);
 
-        return redirect()->route('menor.formulario', $usuario->id)
+        return redirect()->route('menor.formulario', $usuario->hash_id)
             ->with('success', 'Menor registrado correctamente. Puede agregar otro o finalizar.');
     }
 
