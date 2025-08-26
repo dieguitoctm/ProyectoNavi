@@ -157,6 +157,10 @@ class InscripcionController extends Controller
 
         return view('despedida', compact('usuario', 'cantidadMenores'));
     }
+
+
+
+    
     public function exportExcel()
     {
         return Excel::download(new UsuariosMenoresExport, 'usuarios_menores.xlsx');
