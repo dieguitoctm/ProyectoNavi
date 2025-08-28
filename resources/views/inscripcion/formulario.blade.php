@@ -9,7 +9,8 @@
     <div class="row no-gutters">
         <div class="col-12">
             <div class="form-wrapper">
-                <h1 class="text-center form-title">🎄 Formulario de Inscripción</h1>
+                <h1 class="text-center form-title">🎄DATOS DEL <span style="color: red; text-transform: uppercase;">TUTOR</span>🎄</h1>
+                <p class="text-center mb-4">Por favor, complete todos los campos con los datos del tutor responsable.</p>
 
                 @if ($errors->any())
                 <div class="alert alert-danger">
@@ -25,49 +26,49 @@
                     @csrf
 
                     <div class="form-group">
-                        <label for="nombres" class="form-label">Nombres</label>
+                        <label for="nombres" class="form-label">Nombres del tutor</label>
                         <input type="text" class="form-control" id="nombres" name="nombres"
                                value="{{ old('nombres') }}" minlength="2" maxlength="50" required pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$">
                         <div class="invalid-feedback">Ingrese un nombre válido (solo letras).</div>
                     </div>
 
                     <div class="form-group">
-                        <label for="ap_paterno" class="form-label">Apellido Paterno</label>
+                        <label for="ap_paterno" class="form-label">Apellido Paterno del tutor</label>
                         <input type="text" class="form-control" id="ap_paterno" name="ap_paterno"
                                value="{{ old('ap_paterno') }}" minlength="2" maxlength="50" required pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$">
                         <div class="invalid-feedback">Ingrese un apellido válido (solo letras).</div>
                     </div>
 
                     <div class="form-group">
-                        <label for="ap_materno" class="form-label">Apellido Materno</label>
+                        <label for="ap_materno" class="form-label">Apellido Materno del tutor</label>
                         <input type="text" class="form-control" id="ap_materno" name="ap_materno"
                                value="{{ old('ap_materno') }}" minlength="2" maxlength="50" required pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$">
                         <div class="invalid-feedback">Ingrese un apellido válido (solo letras).</div>
                     </div>
 
                     <div class="form-group">
-                        <label for="telefono" class="form-label">Teléfono (+569XXXXXXXX)</label>
+                        <label for="telefono" class="form-label">Teléfono del tutor (+569XXXXXXXX)</label>
                         <input type="tel" class="form-control" id="telefono" name="telefono"
                                value="{{ old('telefono', '+569') }}" minlength="12" maxlength="12" required pattern="^\+569\d{8}$">
                         <div class="invalid-feedback">Ingrese un teléfono válido en formato +569XXXXXXXX.</div>
                     </div>
 
                     <div class="form-group">
-                        <label for="direccion" class="form-label">Dirección</label>
+                        <label for="direccion" class="form-label">Dirección del tutor</label>
                         <input type="text" class="form-control" id="direccion" name="direccion"
                                value="{{ old('direccion') }}" maxlength="50" required>
                         <div class="invalid-feedback">Ingrese una dirección (máximo 50 caracteres).</div>
                     </div>
 
                     <div class="form-group">
-                        <label for="rut" class="form-label">RUT (Ej: 12.345.678-9)</label>
+                        <label for="rut" class="form-label">RUT del tutor (Ej: 12.345.678-9)</label>
                         <input type="text" class="form-control" id="rut" name="rut"
                                value="{{ old('rut') }}" maxlength="12" required>
                         <div class="invalid-feedback" id="rut-error">RUT inválido. Revise el formato y dígito verificador.</div>
                     </div>
 
                     <div class="form-group">
-                        <label for="registro_social" class="form-label">Registro Social de Hogares</label>
+                        <label for="registro_social" class="form-label">Registro Social de Hogares del tutor</label>
                         <input type="file" class="form-control" id="registro_social" name="registro_social"
                                accept=".pdf,.jpg,.png" required>
                         <div class="invalid-feedback">Debe subir un archivo válido (PDF/JPG/PNG).</div>
