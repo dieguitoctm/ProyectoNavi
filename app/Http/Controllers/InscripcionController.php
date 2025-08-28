@@ -33,10 +33,10 @@ class InscripcionController extends Controller
             'telefono' => 'required|regex:/^\+569\d{8}$/',
             'direccion' => 'required|max:50',
             'rut' => 'required|regex:/^\d{1,2}\.?\d{3}\.?\d{3}-[\dkK]$/|unique:datos_usuarios,rut',
-            'registro_social' => 'required|file|mimes:pdf,jpg,png|max:2048',
+            'registro_social' => 'required|file|mimes:pdf,jpg,png|',
             'embarazada' => 'nullable|in:si,no',
             'meses_gestacion' => 'required_if:embarazada,si|integer|min:1|max:9',
-            'carnet_gestacion' => 'required_if:embarazada,si|file|mimes:pdf,jpg,png|max:2048',
+            'carnet_gestacion' => 'required_if:embarazada,si|file|mimes:pdf,jpg,png|',
         ]);
 
         $archivoRegistroSocial = $request->file('registro_social')->store('archivos', 'public');
@@ -68,7 +68,7 @@ class InscripcionController extends Controller
     // Listar usuarios en admin
     public function index()
     {
-        $usuarios = DatosUsuario::with(['embarazada', 'menores'])->paginate(10);
+        $usuarios = DatosUsuario::all();
         return view('admin', compact('usuarios'));
     }
 
