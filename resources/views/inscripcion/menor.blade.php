@@ -35,14 +35,14 @@
             @csrf
 
             <div class="form-group">
-                <label for="nombres" class="form-label">Nombres</label>
+                <label for="nombres" class="form-label">Nombres del menor</label>
                 <input type="text" name="nombres" id="nombres" value="{{ old('nombres') }}" class="form-control"
                     required pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$" minlength="2" maxlength="50" autocomplete="off">
                 <div class="invalid-feedback">Ingrese un nombre válido (solo letras).</div>
             </div>
 
             <div class="form-group">
-                <label for="ap_paterno" class="form-label">Apellido Paterno</label>
+                <label for="ap_paterno" class="form-label">Apellido Paterno del menor</label>
                 <input type="text" name="ap_paterno" id="ap_paterno" value="{{ old('ap_paterno') }}"
                     class="form-control" required pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$" minlength="2" maxlength="50"
                     autocomplete="off">
@@ -50,7 +50,7 @@
             </div>
 
             <div class="form-group">
-                <label for="ap_materno" class="form-label">Apellido Materno</label>
+                <label for="ap_materno" class="form-label">Apellido Materno del menor</label>
                 <input type="text" name="ap_materno" id="ap_materno" value="{{ old('ap_materno') }}"
                     class="form-control" required pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$" minlength="2" maxlength="50"
                     autocomplete="off">
@@ -58,14 +58,14 @@
             </div>
 
             <div class="form-group">
-                <label for="rut" class="form-label">RUT (Ej: 12.345.678-9)</label>
+                <label for="rut" class="form-label">RUT del menor (Ej: 12.345.678-9)</label>
                 <input type="text" name="rut" id="rut" value="{{ old('rut') }}" class="form-control" maxlength="12"
                     required autocomplete="off">
                 <div class="invalid-feedback" id="rut-error">RUT inválido. Revise el formato y dígito verificador.</div>
             </div>
 
             <div class="form-group">
-                <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
+                <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento del menor</label>
                 <input
                     type="text"
                     name="fecha_nacimiento"
@@ -80,7 +80,7 @@
             </div>
 
             <div class="form-group">
-                <label for="genero" class="form-label">Género</label>
+                <label for="genero" class="form-label">Género del menor</label>
                 <select name="genero" id="genero" class="form-select" required>
                     <option value="" selected disabled>Seleccione</option>
                     <option value="Masculino" {{ old('genero') == 'Masculino' ? 'selected' : '' }}>Masculino</option>
