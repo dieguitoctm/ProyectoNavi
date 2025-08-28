@@ -9,10 +9,10 @@
     <div class="row no-gutters">
         <div class="col-12">
             <div class="form-wrapper">
+
                 <h1 class="text-center form-title">🎄DATOS DEL TUTOR🎄</h1>
                 <h1 class="text-center form-title">🎄DATOS DEL TUTOR🎄<span style="color:red; text-transform: uppercase;"> TUTOR</span> </h1>
                 <p class="text-center form-subtitle">Por favor, complete el formulario con los datos del tutor responsable.</p>
-                
                 @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul class="mb-0">
@@ -62,14 +62,14 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="rut" class="form-label">RUT del tutor(Ej: 12.345.678-9)</label>
+                        <label for="rut" class="form-label">RUT del tutor (Ej: 12.345.678-9)</label>
                         <input type="text" class="form-control" id="rut" name="rut"
                                value="{{ old('rut') }}" maxlength="12" required>
                         <div class="invalid-feedback" id="rut-error">RUT inválido. Revise el formato y dígito verificador.</div>
                     </div>
 
                     <div class="form-group">
-                        <label for="registro_social" class="form-label">Registro Social de Hogares</label>
+                        <label for="registro_social" class="form-label">Registro Social de Hogares del tutor</label>
                         <input type="file" class="form-control" id="registro_social" name="registro_social"
                                accept=".pdf,.jpg,.png" required>
                         <div class="invalid-feedback">Debe subir un archivo válido (PDF/JPG/PNG).</div>
