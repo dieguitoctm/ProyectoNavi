@@ -364,3 +364,25 @@
 .bienvenida-link:hover {
     color: #ffd166 !important;
 }
+
+/* Mensajes de Livewire para Revisar Inscripción */
+.alert-success {
+    background-color: #2a9d8f33; /* Verde claro de fondo */
+    color: #2a9d8f; /* Verde del texto */
+    border: 1px solid #2a9d8f;
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+}
+
+.alert-danger {
+    background-color: #e6394633; /* Rojo claro de fondo */
+    color: #e63946; /* Rojo del texto */
+    border: 1px solid #e63946;
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+}
+
+.alert {
+    font-weight: 600;
+    font-size: 0.95rem;
+}

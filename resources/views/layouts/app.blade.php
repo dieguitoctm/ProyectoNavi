@@ -7,6 +7,9 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Livewire Styles -->
+    @livewireStyles
+
     <style>
         /* Esta estructura hace que el footer quede al fondo, incluso si poco contenido */
         html, body {
@@ -31,8 +34,6 @@
             text-align: center;
         }
     </style>
-
-  
 </head>
 <body>
     @include('layouts.nav')
@@ -45,5 +46,8 @@
 
     <!-- Bootstrap JS Bundle con Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Livewire Scripts -->
+    @livewireScripts
 </body>
 </html>

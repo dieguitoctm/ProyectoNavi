@@ -46,4 +46,5 @@ class DatosUsuario extends Model
     {
         return $this->hasMany(Menor::class, 'usuario_id');
     }
+    
 }

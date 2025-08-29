@@ -29,8 +29,8 @@ class MenorController extends Controller
             'rut' => 'required|regex:/^\d{1,2}\.?\d{3}\.?\d{3}-[\dkK]$/|unique:menores,rut',
             'fecha_nacimiento' => 'required|date',
             'genero' => 'required|in:Masculino,Femenino,Otro',
-            'carnet_control_sano' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
-            'certificado_nacimiento' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            'carnet_control_sano' => 'required|file|mimes:pdf,jpg,jpeg,png|',
+            'certificado_nacimiento' => 'required|file|mimes:pdf,jpg,jpeg,png|',
         ], [
             'nombres.required' => 'El campo nombres es obligatorio.',
             'ap_paterno.required' => 'El apellido paterno es obligatorio.',
@@ -83,8 +83,8 @@ class MenorController extends Controller
             'rut' => "required|regex:/^\d{1,2}\.?\d{3}\.?\d{3}-[\dkK]$/|unique:menores,rut,{$menor->id}",
             'fecha_nacimiento' => 'required|date',
             'genero' => 'required|in:Masculino,Femenino,Otro',
-            'carnet_control_sano' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
-            'certificado_nacimiento' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            'carnet_control_sano' => 'nullable|file|mimes:pdf,jpg,jpeg,png|',
+            'certificado_nacimiento' => 'nullable|file|mimes:pdf,jpg,jpeg,png|',
         ]);
 
         $fechaNacimiento = Carbon::parse($request->fecha_nacimiento);
