@@ -35,7 +35,7 @@
                         <th>RUT</th>
                         <th>Registro Social</th>
                         <th>Embarazada</th>
-                        <th class="text-nowrap">Acciones</th>
+                        <th class="text-nowrap" style="min-width: 280px;">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -83,20 +83,29 @@
                             </td>
 
                             <td class="text-nowrap">
-                                <button class="btn btn-primary btn-sm btn-editar" data-bs-toggle="modal"
-                                    data-bs-target="#editarModal" data-id="{{ $usuario->id }}"
-                                    data-nombres="{{ $usuario->nombres }}" data-ap_paterno="{{ $usuario->ap_paterno }}"
-                                    data-ap_materno="{{ $usuario->ap_materno }}" data-telefono="{{ $usuario->telefono }}"
-                                    data-direccion="{{ $usuario->direccion }}" data-rut="{{ $usuario->rut }}">Editar</button>
+                                <div class="d-flex flex-wrap gap-2">
+                                    <button class="btn btn-primary btn-sm btn-editar" data-bs-toggle="modal"
+                                        data-bs-target="#editarModal" data-id="{{ $usuario->id }}"
+                                        data-nombres="{{ $usuario->nombres }}" data-ap_paterno="{{ $usuario->ap_paterno }}"
+                                        data-ap_materno="{{ $usuario->ap_materno }}"
+                                        data-telefono="{{ $usuario->telefono }}" data-direccion="{{ $usuario->direccion }}"
+                                        data-rut="{{ $usuario->rut }}">Editar</button>
 
-                                <button class="btn btn-danger btn-sm btn-eliminar"
-                                    data-id="{{ $usuario->id }}">Eliminar</button>
+                                    <button class="btn btn-danger btn-sm btn-eliminar"
+                                        data-id="{{ $usuario->id }}">Eliminar</button>
+
+                                    <button class="btn btn-info btn-sm btn-ticket" data-id="{{ $usuario->id }}"
+                                        data-nombres="{{ $usuario->nombres }}" data-ap_paterno="{{ $usuario->ap_paterno }}"
+                                        data-ap_materno="{{ $usuario->ap_materno }}"
+                                        data-cant-menores="{{ $usuario->menores->count() }}">Ticket</button>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
+
 
         <!-- Tabla Menores -->
         <div class="table-responsive mb-4">
@@ -330,16 +339,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <!-- jsPDF para generar tickets (igual que despedida.blade.php) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <script>
         $(document).ready(function () {
 
-            // Inicializar DataTables con exportación
+            // Inicializar DataTables con exportación y mejor visibilidad
             $('#usuariosTable').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
                     { extend: 'excelHtml5', title: 'Usuarios' },
                     { extend: 'pdfHtml5', title: 'Usuarios', orientation: 'landscape', pageSize: 'A4' }
+                ],
+                autoWidth: false,
+                scrollX: true,
+                columnDefs: [
+                    { targets: -1, orderable: false, searchable: false, width: '340px' } // Acciones
                 ],
                 language: { url: '//cdn.datatables.net/plug-ins/1.13.5/i18n/es-CL.json' }
             });
@@ -350,6 +366,8 @@
                     { extend: 'excelHtml5', title: 'Menores' },
                     { extend: 'pdfHtml5', title: 'Menores', orientation: 'landscape', pageSize: 'A4' }
                 ],
+                autoWidth: false,
+                scrollX: true,
                 language: { url: '//cdn.datatables.net/plug-ins/1.13.5/i18n/es-CL.json' }
             });
 
@@ -369,14 +387,17 @@
             // Eliminar usuario
             $('.btn-eliminar').click(function () {
                 if (confirm('¿Eliminar usuario?')) {
-                    $('<form>', { 'method': 'POST', 'action': '/admin/' + $(this).data('id') })
-                        .append('@csrf<input type="hidden" name="_method" value="DELETE">')
+                    const id = $(this).data('id');
+                    const csrf = '{{ csrf_token() }}';
+                    $('<form>', { 'method': 'POST', 'action': '/admin/' + id })
+                        .append($('<input>', { type: 'hidden', name: '_token', value: csrf }))
+                        .append($('<input>', { type: 'hidden', name: '_method', value: 'DELETE' }))
                         .appendTo('body').submit();
                 }
             });
 
             // Modal editar menor
-            $(document).on('click', '.btn-editar-menor', function() {
+            $(document).on('click', '.btn-editar-menor', function () {
                 let btn = $(this);
                 $('#editar_menor_id').val(btn.data('id'));
                 $('#editar_menor_nombres').val(btn.data('nombres'));
@@ -391,8 +412,11 @@
             // Eliminar menor
             $('.btn-eliminar-menor').click(function () {
                 if (confirm('¿Eliminar menor?')) {
-                    $('<form>', { 'method': 'POST', 'action': '/admin/menores/' + $(this).data('id') })
-                        .append('@csrf<input type="hidden" name="_method" value="DELETE">')
+                    const id = $(this).data('id');
+                    const csrf = '{{ csrf_token() }}';
+                    $('<form>', { 'method': 'POST', 'action': '/admin/menores/' + id })
+                        .append($('<input>', { type: 'hidden', name: '_token', value: csrf }))
+                        .append($('<input>', { type: 'hidden', name: '_method', value: 'DELETE' }))
                         .appendTo('body').submit();
                 }
             });
@@ -456,10 +480,9 @@
                 }
             });
 
-            // Botón "Ver más" por menor (puedes adaptarlo para abrir modal con más detalles)
+            // Botón "Ver más" por menor
             $('.btn-ver-mas').click(function () {
                 let id = $(this).data('id');
-                // Actualmente solo scrollea a tarjetas (si existe)
                 const tarjeta = $(`#menoresPorTutor .menor-card`).filter(function () {
                     return $(this).find('.btn-editar-menor').data('id') == id;
                 }).first();
@@ -469,6 +492,38 @@
                 } else {
                     alert('Detalles no disponibles en la vista ampliada.');
                 }
+            });
+
+            // Generar Ticket PDF (mismo método que despedida.blade.php)
+            $(document).on('click', '.btn-ticket', function () {
+                const { jsPDF } = window.jspdf;
+
+                const id = $(this).data('id');
+                const nombres = $(this).data('nombres') || '';
+                const apPaterno = $(this).data('ap_paterno') || '';
+                const apMaterno = $(this).data('ap_materno') || '';
+                const cantMenores = $(this).data('cant-menores') || 0;
+                const nombreCompleto = `${nombres} ${apPaterno} ${apMaterno}`.trim();
+
+                const doc = new jsPDF({
+                    orientation: "portrait",
+                    unit: "mm",
+                    format: [80, 150]
+                });
+
+                doc.setFontSize(12);
+                doc.text("Inscripción Navidad Coinco", 40, 15, { align: "center" });
+                doc.setFontSize(10);
+                doc.text(`Gracias, ${nombreCompleto}!`, 40, 25, { align: "center" });
+                doc.text(`Número de Atención: ${id}`, 40, 35, { align: "center" });
+                doc.text(`Cantidad de Menores: ${cantMenores}`, 40, 45, { align: "center" });
+                doc.text("¡Felices fiestas!", 40, 55, { align: "center" });
+
+                doc.setFontSize(8);
+                doc.text("------------------------------", 40, 60, { align: "center" });
+                doc.text("Generado automáticamente", 40, 65, { align: "center" });
+
+                doc.save(`ticket_${id}.pdf`);
             });
 
         });

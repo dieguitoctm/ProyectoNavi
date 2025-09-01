@@ -15,6 +15,8 @@ table.dataTable {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-bottom: 2rem !important;
     background: white;
+    width: 100% !important;      /* 🔹 siempre ocupar todo el ancho */
+    table-layout: auto !important; /* 🔹 dejar que las celdas crezcan según el contenido */
 }
 
 table.dataTable thead {
@@ -26,6 +28,7 @@ table.dataTable thead th {
     padding: 1rem 0.75rem;
     font-weight: 600;
     border: none;
+    white-space: nowrap; /* 🔹 evita que se rompan los encabezados */
 }
 
 table.dataTable tbody tr {
@@ -107,10 +110,6 @@ table.dataTable tbody td {
 }
 
 .table thead th {
-    white-space: nowrap;
-}
-
-.table .text-nowrap {
     white-space: nowrap;
 }
 
@@ -235,12 +234,13 @@ h2 {
     padding: 2rem !important;
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
+    max-width: 95% !important; /* 🔹 aumenta el ancho máximo */
 }
 
 /* Texto en tablas */
 .table-responsive {
     border-radius: 8px;
-    overflow: hidden;
+    overflow-x: auto; /* 🔹 habilita scroll horizontal si es necesario */
 }
 
 /* Estilos para el botón de ver más */
@@ -286,5 +286,38 @@ h2 {
     h2 {
         font-size: 1.3rem;
         padding: 8px 12px;
+    }
+}
+
+/* ====== Mejoras en columna Acciones ====== */
+.table td .acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px; /* separa un poco los botones */
+    min-width: 260px; /* 🔹 más espacio para que entren los botones */
+}
+
+.table td .acciones .btn {
+    padding: 0.25rem 0.45rem;
+    font-size: 0.8rem;
+    margin: 0;
+}
+
+.btn-ticket {
+    background: linear-gradient(135deg, #17a2b8 0%, #138496 100%) !important;
+    border: none;
+    color: white;
+    font-weight: 500;
+}
+
+.btn-ticket:hover {
+    background: linear-gradient(135deg, #138496 0%, #117a8b 100%) !important;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .table td .acciones .btn {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.35rem;
     }
 }

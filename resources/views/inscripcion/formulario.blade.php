@@ -9,7 +9,7 @@
     <div class="row no-gutters">
         <div class="col-12">
             <div class="form-wrapper">
-                <h1 class="text-center form-title">🎄DATOS DEL TUTOR🎄<span style="color:red; text-transform: uppercase;"> TUTOR</span> </h1>
+                <h1 class="text-center form-title">🎄DATOS DEL <span style="color:red; text-transform: uppercase;">TUTOR🎄</span> </h1>
                 <p class="text-center form-subtitle">Por favor, complete el formulario con los datos del tutor responsable.</p>
                 @if ($errors->any())
                 <div class="alert alert-danger">
